@@ -19,11 +19,6 @@ public class JobDetailPage {
         this.driver = driver;
     }
 
-    public void offerBlockItem() {
-        WebElement item = driver.findElement(By.xpath("//h4[contains(text(),'We offer')]/..//li[contains(text(),'Flexible work hours')]"));
-        Assert.assertEquals(true, item.isDisplayed());
-    }
-
     public void waitForTextToAppear() {
         String textToAppear = "Apply For";
         WebElement titleText = driver.findElement(By.xpath("//div//h3[text()='Apply For']"));
@@ -54,6 +49,10 @@ public class JobDetailPage {
 
         Assert.assertEquals(blocks.get(3).getText(), weOffer.toUpperCase());
         Assert.assertEquals(true, blocks.get(3).isDisplayed());
+    }
 
+    public void offerBlockItem() {
+        WebElement item = driver.findElement(By.xpath("//h4[contains(text(),'We offer')]/..//li[contains(text(),'Flexible work hours')]"));
+        Assert.assertEquals(true, item.isDisplayed());
     }
 }
