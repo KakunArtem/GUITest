@@ -35,7 +35,7 @@ public class EndToEndStep extends BrowserDriver {
 
     @And("^User go to \"([^\"]*)\" tab\\.$")
     public void user_go_to_tab(String arg1) {
-        vacanciesPage.vacanciesButton.click();
+        vacanciesPage.headerVacanciesBtn.click();
         vacanciesPage.verifyCurrentURL(arg1);
     }
 
@@ -57,7 +57,7 @@ public class EndToEndStep extends BrowserDriver {
 
     @When("^User click \"([^\"]*)\" button\\.$")
     public void user_click_button(String arg1) {
-        vacanciesPage.findVcButton.click();
+        vacanciesPage.findJobBtn.click();
     }
 
     @Then("^User sees list of job openings related to above criteria\\.$")

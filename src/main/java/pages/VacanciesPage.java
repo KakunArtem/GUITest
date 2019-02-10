@@ -18,10 +18,10 @@ public class VacanciesPage {
     }
 
     @FindBy(xpath = "//span/a[contains(text(),'Vacancies')]")
-    public WebElement vacanciesButton;
+    public WebElement headerVacanciesBtn;
 
     @FindBy(css = "button[type = submit]")
-    public WebElement findVcButton;
+    public WebElement findJobBtn;
 
     public void waitForTextToAppear() {
         String textToAppear = "Work with Us";
