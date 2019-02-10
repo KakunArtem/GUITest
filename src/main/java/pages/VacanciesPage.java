@@ -21,7 +21,7 @@ public class VacanciesPage {
     public WebElement vacanciesButton;
 
     @FindBy(css = "button[type = submit]")
-    public WebElement submitButton;
+    public WebElement findVcButton;
 
     public void waitForTextToAppear() {
         String textToAppear = "Work with Us";

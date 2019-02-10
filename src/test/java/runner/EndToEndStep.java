@@ -11,10 +11,10 @@ import pages.VacanciesPage;
 import utils.BrowserDriver;
 
 public class EndToEndStep extends BrowserDriver {
-    FrontPage frontPage = new FrontPage(driver);
-    VacanciesPage vacanciesPage = new VacanciesPage(driver);
-    JobListingsPage jobListingsPage = new JobListingsPage(driver);
-    JobDetailPage jobDetailPage = new JobDetailPage(driver);
+    private FrontPage frontPage = new FrontPage(driver);
+    private VacanciesPage vacanciesPage = new VacanciesPage(driver);
+    private JobListingsPage jobListingsPage = new JobListingsPage(driver);
+    private JobDetailPage jobDetailPage = new JobDetailPage(driver);
 
     @Given("^User is not an EPAM employee\\.$")
     public void user_is_not_an_EPAM_employee() {
@@ -57,7 +57,7 @@ public class EndToEndStep extends BrowserDriver {
 
     @When("^User click \"([^\"]*)\" button\\.$")
     public void user_click_button(String arg1) {
-        vacanciesPage.submitButton.click();
+        vacanciesPage.findVcButton.click();
     }
 
     @Then("^User sees list of job openings related to above criteria\\.$")
