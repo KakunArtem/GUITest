@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class VacanciesPage {
     private WebDriver driver;
 
@@ -20,10 +22,7 @@ public class VacanciesPage {
     @FindBy(xpath = "//span/a[contains(text(),'Vacancies')]")
     public WebElement headerVacanciesBtn;
 
-    @FindBy(css = "button[type = submit]")
-    public WebElement findJobBtn;
-
-    public void waitForTextToAppear() {
+    public void waitForAppear() {
         String textToAppear = "Work with Us";
         WebElement titleText = driver.findElement(By.xpath("//h1[contains(text(),'Work with Us')]"));
 
@@ -49,32 +48,51 @@ public class VacanciesPage {
         jobId.sendKeys(keyWord);
     }
 
-    public void selectSkill(String jobType, String drpType) {
-        WebElement skillSelectDrp = driver.findElement(By.xpath("//div[contains(text(),'All Skills')]"));
-        skillSelectDrp.click();
 
-        WebElement qaAutomation = driver.findElement(By.xpath("//span[contains(text(),'Software Test Engineering')]"));
-        switch (jobType) {
-            case "Software Test Engineering":
-                qaAutomation.click();
+    public void selectLocation(String location) throws Exception {
+        WebElement locationDrpBtn = driver.findElement(By.xpath("//span/b[@role='presentation']"));
+        locationDrpBtn.click();
+        Thread.sleep(5000);
+
+        WebElement locationDrp = driver.findElement(By.cssSelector(".select2-results"));
+        Assert.assertEquals(true, locationDrp.isDisplayed());
+
+        List<WebElement> locations = driver.findElements(By.xpath("//ul[@role='listbox']/li"));
+        for (WebElement o : locations) {
+            if (o.getText().equals(location)) {
+                o.click();
                 break;
-            default:
-                throw new IllegalArgumentException("Wrong job type.");
+            }
         }
     }
 
-    public void selectLocation(String location) throws Exception {
-        WebElement locationDrp = driver.findElement(By.xpath("//span/b[@role='presentation']"));
-        locationDrp.click();
+    public void selectSkill(String jobTitle, String drpType) throws Exception {
+        WebElement skillSelectDrp = driver.findElement(By.xpath("//div[contains(text(),'All Skills')]"));
+        skillSelectDrp.click();
         Thread.sleep(5000);
 
-        WebElement locationKyiv = driver.findElement(By.xpath("//li[contains(text(),\"Kyiv\")]"));
-        switch (location) {
-            case "Kyiv":
-                locationKyiv.click();
+        WebElement skillsDrp = driver.findElement(By.cssSelector(".multi-select-dropdown"));
+        Assert.assertEquals(true, skillsDrp.isDisplayed());
+
+        List<WebElement> skills = driver.findElements(By.xpath("//div/div/ul//span[contains(text(),'')]"));
+        for (WebElement o : skills) {
+            if (o.getText().equals(jobTitle)) {
+                o.click();
                 break;
-            default:
-                throw new IllegalArgumentException("Wrong location.");
+            }
+        }
+    }
+
+    public void clickBtn(String button){
+        List<WebElement> buttonsTop = driver.findElements(By.xpath("//button"));
+        List<WebElement> buttonsAll = driver.findElements(By.xpath("//span[contains(@class, 'button__content')]"));
+        buttonsAll.addAll(buttonsTop);
+
+        for (WebElement o: buttonsAll) {
+            if(o.getText().equals(button.toUpperCase())){
+                o.click();
+                break;
+            }
         }
     }
 }

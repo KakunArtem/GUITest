@@ -2,12 +2,14 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class JobListingsPage {
     private WebDriver driver;
@@ -17,22 +19,29 @@ public class JobListingsPage {
         this.driver = driver;
     }
 
-    @FindBy(xpath = "(//a[text()='Apply'])[1]")
-    public WebElement applyFirstVacancy;
-
-    public void waitForTextToAppear() {
-        String textToAppear = "Sort By:";
-        WebElement titleText = driver.findElement(By.xpath("//span[contains(text(),'Sort By:')"));
-
+    public void waitForAppear() {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.textToBePresentInElement(titleText, textToAppear));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".selected-items")));
     }
 
-    public void checkChosenCriteria() {
-//        WebElement selectedJob = driver.findElement(By.xpath("(//li[@data-value='Software Test Engineering'])[2]"));          //оставить пока
-//        Assert.assertEquals(true,selectedJob.isDisplayed());
+    public void checkChosenCriteria(String jobType, String location) {
+        WebElement selectedItems = driver.findElement(By.xpath("//ul[@class='selected-items']/li[contains(text(), '')]"));          //переделать, чтобы искало матчи
+        Assert.assertEquals(selectedItems.getText(), jobType.toUpperCase());
 
-        WebElement selectedLocation = driver.findElement(By.xpath("(//strong[contains(text(),'Kyiv, Ukraine')])[1]"));
-        Assert.assertEquals(true, selectedLocation.isDisplayed());
+        WebElement selectedLocation = driver.findElement(By.xpath("(//header/strong)[1]"));
+        Assert.assertEquals(selectedLocation.getText(), location.toUpperCase());
+    }
+
+    public void clickApplyBtn(String button, int option) {
+        List<WebElement> buttons = driver.findElements(By.xpath("//a[@class='search-result__item-apply' and contains(text(),'Apply')]"));
+        for (WebElement o : buttons) {
+            if (option > 0 && option <= buttons.size() && o.getText().equals(button.toUpperCase())) {
+                buttons.get(option - 1).click();
+                break;
+            } else {
+                throw new NotFoundException("option " + option + " not found");
+            }
+        }
     }
 }
+

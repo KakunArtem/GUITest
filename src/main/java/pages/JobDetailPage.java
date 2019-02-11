@@ -37,7 +37,7 @@ public class JobDetailPage {
         Assert.assertEquals(descriptionBlock.getText(), description.toUpperCase());
         Assert.assertEquals(true, descriptionBlock.isDisplayed());
 
-        List<WebElement> blocks = driver.findElements(By.xpath("//div[@class='section__content-holder']/h4"));
+        List<WebElement> blocks = driver.findElements(By.xpath("//ul[@class='bullet-list']/preceding-sibling::h4"));
         Assert.assertEquals(blocks.get(0).getText(), req.toUpperCase());
         Assert.assertEquals(true, blocks.get(0).isDisplayed());
 
@@ -56,3 +56,4 @@ public class JobDetailPage {
         Assert.assertEquals(true, item.isDisplayed());
     }
 }
+

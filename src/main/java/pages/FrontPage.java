@@ -1,12 +1,13 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.List;
 
 public class FrontPage {
     private WebDriver driver;
@@ -16,33 +17,28 @@ public class FrontPage {
         this.driver = driver;
     }
 
-    @FindBy(css = ".location-selector__button")
-    public WebElement locationDrp;
-
-    @FindBy(xpath = "(//a[contains(text(),'Ukraine/English')])[1]")
-    public WebElement SelectUaRegion;
-
-    @FindBy(xpath = "//span[contains(text(),'Accept')]")                                            //1 step
-    private WebElement cookieDisclaimer;
-
-    public void waitForTextToAppear() {
-        String textToAppear = "Engineering the Future";
-        WebElement titleText = driver.findElement(By.xpath("//h1[@class='background-video__title title--bold']"));
-
+    public void waitForAppear() {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.textToBePresentInElement(titleText, textToAppear));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cookie-disclaimer-ui")));
     }
 
     public String goToHomePage() {
         return "https://www.epam.com/";
     }
 
-    public boolean epamEmployee() {                                                                 //1 step
-        String cookieText = "Accept".toUpperCase();
-        if (cookieDisclaimer.getText().equals(cookieText)) {
-            return false;
-        } else {
-            return true;
+    public void selectLocation(String location){
+        WebElement selectRegionBtn = driver.findElement(By.cssSelector(".location-selector__button"));
+        selectRegionBtn.click();
+
+        WebElement regionDrp = driver.findElement(By.xpath("(//h2[contains(text(),'Select a region')])[1]"));
+        Assert.assertEquals(true, regionDrp.isDisplayed());
+
+        List<WebElement> locations = driver.findElements(By.cssSelector(".location-selector__link"));
+        for (WebElement o : locations){
+            if (o.getText().equals(location)){
+                o.click();
+                break;
+            }
         }
     }
 }

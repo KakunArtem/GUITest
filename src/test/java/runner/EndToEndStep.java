@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.java.es.E;
 import pages.FrontPage;
 import pages.JobDetailPage;
 import pages.JobListingsPage;
@@ -18,7 +19,7 @@ public class EndToEndStep extends BrowserDriver {
 
     @Given("^User is not an EPAM employee\\.$")
     public void user_is_not_an_EPAM_employee() {
-//        Assert.assertEquals(false, frontPage.epamEmployee());
+    //skip
     }
 
     @When("^User go to website 'epam\\.com'\\.$")
@@ -26,11 +27,10 @@ public class EndToEndStep extends BrowserDriver {
         BrowserDriver.loadPage(frontPage.goToHomePage());
     }
 
-    @And("^User select region 'Ukraine/English' at location dropdown\\.$")
-    public void user_select_region_Ukraine_English_at_location_dropdown() {
-        frontPage.waitForTextToAppear();
-        frontPage.locationDrp.click();
-        frontPage.SelectUaRegion.click();
+    @And("^User select region \"([^\"]*)\" at location dropdown\\.$")
+    public void user_select_region_at_location_dropdown(String arg1){
+        frontPage.waitForAppear();
+        frontPage.selectLocation(arg1);
     }
 
     @And("^User go to \"([^\"]*)\" tab\\.$")
@@ -41,7 +41,7 @@ public class EndToEndStep extends BrowserDriver {
 
     @And("^User fill the search field \"([^\"]*)\" with value \"([^\"]*)\"\\.$")
     public void user_fill_the_search_field_with_value(String arg1, String arg2) {
-        vacanciesPage.waitForTextToAppear();
+        vacanciesPage.waitForAppear();
         vacanciesPage.fillSearchField(arg1, arg2);
     }
 
@@ -51,24 +51,24 @@ public class EndToEndStep extends BrowserDriver {
     }
 
     @And("^User tick \"([^\"]*)\" in \"([^\"]*)\" dropdown\\.$")
-    public void user_tick_in_dropdown(String arg1, String arg2) {
+    public void user_tick_in_dropdown(String arg1, String arg2) throws Throwable {
         vacanciesPage.selectSkill(arg1, arg2);
     }
 
     @When("^User click \"([^\"]*)\" button\\.$")
     public void user_click_button(String arg1) {
-        vacanciesPage.findJobBtn.click();
+        vacanciesPage.clickBtn(arg1);
     }
 
-    @Then("^User sees list of job openings related to above criteria\\.$")
-    public void user_sees_list_of_job_openings_related_to_above_criteria() {
-        jobListingsPage.waitForTextToAppear();
-        jobListingsPage.checkChosenCriteria();
+    @Then("^User sees list of job openings related to above criteria \"([^\"]*)\" in \"([^\"]*)\"\\.$")
+    public void user_sees_list_of_job_openings_related_to_above_criteria(String arg1, String arg2) {
+        jobListingsPage.waitForAppear();
+        jobListingsPage.checkChosenCriteria(arg1, arg2);
     }
 
-    @When("^User select first vacancy and click \"([^\"]*)\" button\\.$")
-    public void user_select_first_vacancy_and_click_button(String arg1) {
-        jobListingsPage.applyFirstVacancy.click();
+    @When("^User select first vacancy and click \"([^\"]*)\" \"([^\"]*)\" button\\.$")
+    public void user_select_first_vacancy_and_click_button(String arg1, int arg2){
+        jobListingsPage.clickApplyBtn(arg1, arg2);
     }
 
     @Then("^User sees description of selected vacancy\\.$")
