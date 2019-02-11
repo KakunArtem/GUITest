@@ -24,19 +24,22 @@ public class JobListingsPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".selected-items")));
     }
 
-    public void checkChosenCriteria(String jobType, String location) {
-        WebElement selectedItems = driver.findElement(By.xpath("//ul[@class='selected-items']/li[contains(text(), '')]"));          //переделать, чтобы искало матчи
-        Assert.assertEquals(selectedItems.getText(), jobType.toUpperCase());
+    public void checkChosenCriteria(String skillType, String location, String jobId) {
+        WebElement selectedItems = driver.findElement(By.xpath("//ul[@class='selected-items']/li[contains(text(), '')]"));
+        Assert.assertEquals(selectedItems.getText(), skillType.toUpperCase());
 
         WebElement selectedLocation = driver.findElement(By.xpath("(//header/strong)[1]"));
         Assert.assertEquals(selectedLocation.getText(), location.toUpperCase());
+
+        WebElement selectedJobId = driver.findElement(By.xpath("//*[contains(text(),'We found 9 job openings related to \"Java\"')]"));
+        Assert.assertTrue(selectedJobId.getText().contains(jobId.toUpperCase()));
     }
 
     public void clickApplyBtn(String button, int option) {
-        List<WebElement> buttons = driver.findElements(By.xpath("//a[@class='search-result__item-apply' and contains(text(),'Apply')]"));
-        for (WebElement o : buttons) {
-            if (option > 0 && option <= buttons.size() && o.getText().equals(button.toUpperCase())) {
-                buttons.get(option - 1).click();
+        List<WebElement> applyButtons = driver.findElements(By.xpath("//a[@class='search-result__item-apply' and contains(text(),'Apply')]"));
+        for (WebElement o : applyButtons) {
+            if (option > 0 && option <= applyButtons.size() && o.getText().equals(button.toUpperCase())) {
+                applyButtons.get(option - 1).click();
                 break;
             } else {
                 throw new NotFoundException("option " + option + " not found");

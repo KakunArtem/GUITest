@@ -19,18 +19,18 @@ public class EndToEndStep extends BrowserDriver {
 
     @Given("^User is not an EPAM employee\\.$")
     public void user_is_not_an_EPAM_employee() {
-    //skip
+        //skip
     }
 
-    @When("^User go to website 'epam\\.com'\\.$")
-    public void user_go_to_website_epam_com() {
-        BrowserDriver.loadPage(frontPage.goToHomePage());
+    @When("^User go to website \"([^\"]*)\"\\.$")
+    public void user_go_to_website_epam_com(String arg1) {
+        BrowserDriver.loadPage(frontPage.goToWebSite(arg1));
     }
 
     @And("^User select region \"([^\"]*)\" at location dropdown\\.$")
-    public void user_select_region_at_location_dropdown(String arg1){
+    public void user_select_region_at_location_dropdown(String arg1) {
         frontPage.waitForAppear();
-        frontPage.selectLocation(arg1);
+        frontPage.selectRegion(arg1);
     }
 
     @And("^User go to \"([^\"]*)\" tab\\.$")
@@ -60,14 +60,14 @@ public class EndToEndStep extends BrowserDriver {
         vacanciesPage.clickBtn(arg1);
     }
 
-    @Then("^User sees list of job openings related to above criteria \"([^\"]*)\" in \"([^\"]*)\"\\.$")
-    public void user_sees_list_of_job_openings_related_to_above_criteria(String arg1, String arg2) {
+    @Then("^User sees list of job openings related to above criteria: \"([^\"]*)\" in \"([^\"]*)\", \"([^\"]*)\"\\.$")
+    public void user_sees_list_of_job_openings_related_to_above_criteria(String arg1, String arg2, String arg3) {
         jobListingsPage.waitForAppear();
-        jobListingsPage.checkChosenCriteria(arg1, arg2);
+        jobListingsPage.checkChosenCriteria(arg1, arg2, arg3);
     }
 
     @When("^User select first vacancy and click \"([^\"]*)\" \"([^\"]*)\" button\\.$")
-    public void user_select_first_vacancy_and_click_button(String arg1, int arg2){
+    public void user_select_first_vacancy_and_click_button(String arg1, int arg2) {
         jobListingsPage.clickApplyBtn(arg1, arg2);
     }
 
@@ -82,8 +82,8 @@ public class EndToEndStep extends BrowserDriver {
         jobDetailPage.blocksPresentsCheck(arg1, arg2, arg3, arg4, arg5);
     }
 
-    @Then("^User sees item \"([^\"]*)\" at \"([^\"]*)\" block\\.$")
-    public void user_sees_item_at_block(String arg1, String arg2) {
-        jobDetailPage.offerBlockItem();
+    @Then("^User sees item \"([^\"]*)\" \"([^\"]*)\" at \"([^\"]*)\" block\\.$")
+    public void user_sees_item_at_block(String arg1, int arg2, String arg3) {
+        jobDetailPage.offerBlockItem(arg1, arg2, arg3);
     }
 }

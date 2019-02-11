@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.List;
 
 public class FrontPage {
@@ -22,20 +23,20 @@ public class FrontPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cookie-disclaimer-ui")));
     }
 
-    public String goToHomePage() {
-        return "https://www.epam.com/";
+    public String goToWebSite(String webPage) {
+        return webPage;
     }
 
-    public void selectLocation(String location){
+    public void selectRegion(String region) {
         WebElement selectRegionBtn = driver.findElement(By.cssSelector(".location-selector__button"));
         selectRegionBtn.click();
 
         WebElement regionDrp = driver.findElement(By.xpath("(//h2[contains(text(),'Select a region')])[1]"));
         Assert.assertEquals(true, regionDrp.isDisplayed());
 
-        List<WebElement> locations = driver.findElements(By.cssSelector(".location-selector__link"));
-        for (WebElement o : locations){
-            if (o.getText().equals(location)){
+        List<WebElement> regions = driver.findElements(By.cssSelector(".location-selector__link"));
+        for (WebElement o : regions) {
+            if (o.getText().equals(region)) {
                 o.click();
                 break;
             }

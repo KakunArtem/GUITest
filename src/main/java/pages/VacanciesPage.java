@@ -48,7 +48,6 @@ public class VacanciesPage {
         jobId.sendKeys(keyWord);
     }
 
-
     public void selectLocation(String location) throws Exception {
         WebElement locationDrpBtn = driver.findElement(By.xpath("//span/b[@role='presentation']"));
         locationDrpBtn.click();
@@ -83,13 +82,13 @@ public class VacanciesPage {
         }
     }
 
-    public void clickBtn(String button){
+    public void clickBtn(String button) {
         List<WebElement> buttonsTop = driver.findElements(By.xpath("//button"));
-        List<WebElement> buttonsAll = driver.findElements(By.xpath("//span[contains(@class, 'button__content')]"));
-        buttonsAll.addAll(buttonsTop);
+        List<WebElement> allButtons = driver.findElements(By.xpath("//span[contains(@class, 'button__content')]"));
+        allButtons.addAll(buttonsTop);
 
-        for (WebElement o: buttonsAll) {
-            if(o.getText().equals(button.toUpperCase())){
+        for (WebElement o : allButtons) {
+            if (o.getText().equals(button.toUpperCase())) {
                 o.click();
                 break;
             }

@@ -2,13 +2,14 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JobDetailPage {
@@ -33,27 +34,45 @@ public class JobDetailPage {
     }
 
     public void blocksPresentsCheck(String description, String req, String niceToHave, String tech, String weOffer) {
-        WebElement descriptionBlock = driver.findElement(By.xpath ("//div/h4[contains(text(),'DESCRIPTION')]"));
-        Assert.assertEquals(descriptionBlock.getText(), description.toUpperCase());
-        Assert.assertEquals(true, descriptionBlock.isDisplayed());
+        int count = 0;
 
-        List<WebElement> blocks = driver.findElements(By.xpath("//ul[@class='bullet-list']/preceding-sibling::h4"));
-        Assert.assertEquals(blocks.get(0).getText(), req.toUpperCase());
-        Assert.assertEquals(true, blocks.get(0).isDisplayed());
+        List<String> blocksList = new ArrayList<>();
+        blocksList.add(description);
+        blocksList.add(req);
+        blocksList.add(niceToHave);
+        blocksList.add(tech);
+        blocksList.add(weOffer);
 
-        Assert.assertEquals(blocks.get(1).getText(), niceToHave.toUpperCase());
-        Assert.assertEquals(true, blocks.get(1).isDisplayed());
-
-        Assert.assertEquals(blocks.get(2).getText(), tech.toUpperCase());
-        Assert.assertEquals(true, blocks.get(2).isDisplayed());
-
-        Assert.assertEquals(blocks.get(3).getText(), weOffer.toUpperCase());
-        Assert.assertEquals(true, blocks.get(3).isDisplayed());
+        List<WebElement> blocksWebElems = driver.findElements(By.xpath("//h4[contains(text(),'')]"));
+        for (WebElement o : blocksWebElems) {
+            for (String x : blocksList) {
+                if (o.getText().equals(x.toUpperCase())) {
+                    Assert.assertEquals(true, o.isDisplayed());
+                    count++;
+                }
+            }
+        }
+        if (count < blocksList.size()) {
+            throw new NotFoundException("Missing some blocks");
+        }
     }
 
-    public void offerBlockItem() {
-        WebElement item = driver.findElement(By.xpath("//h4[contains(text(),'We offer')]/..//li[contains(text(),'Flexible work hours')]"));
-        Assert.assertEquals(true, item.isDisplayed());
+    public void offerBlockItem(String item, int itemCount, String blockName) {
+        int count = 0;
+
+        WebElement weOfferBlock = driver.findElement(By.xpath("//h4[contains(text(),'We offer')]/following-sibling::ul"));
+        Assert.assertEquals(true, weOfferBlock.isDisplayed());
+
+        List<WebElement> blockItems = driver.findElements(By.xpath("//h4[contains(text(),'We offer')]/following-sibling::ul/*"));
+        for (WebElement o : blockItems) {
+            if (o.getText().equals(item)) {
+                Assert.assertEquals(true, o.isDisplayed());
+                count++;
+            }
+        }
+        if (count < itemCount) {
+            throw new NotFoundException("Missing some items");
+        }
     }
 }
 
