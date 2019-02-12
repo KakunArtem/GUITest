@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class VacanciesPage {
+public class VacanciesPage {                        //наследуемся от PageObjrct +
     private WebDriver driver;
 
     public VacanciesPage(WebDriver driver) {

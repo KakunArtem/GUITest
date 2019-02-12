@@ -2,16 +2,15 @@ package utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import java.util.concurrent.TimeUnit;
 
 public class BrowserDriver {
-    public static WebDriver driver;
+    public static WebDriver driver = new ChromeDriver();
 
     public static void browserSetUp() {
-        System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
-        driver = new ChromeDriver();
+//        System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
+//        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(99, TimeUnit.SECONDS);
