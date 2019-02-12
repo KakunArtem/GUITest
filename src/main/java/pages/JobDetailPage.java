@@ -6,8 +6,6 @@ import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +16,6 @@ public class JobDetailPage {
     public JobDetailPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-    }
-
-    public void waitForTextToAppear() {
-        String textToAppear = "Apply For";
-        WebElement titleText = driver.findElement(By.xpath("//div//h3[text()='Apply For']"));
-
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.textToBePresentInElement(titleText, textToAppear.toUpperCase()));
     }
 
     public void checkDescription() {

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class VacanciesPage {                        //наследуемся от PageObjrct +
+public class VacanciesPage {
     private WebDriver driver;
 
     public VacanciesPage(WebDriver driver) {
@@ -21,14 +21,6 @@ public class VacanciesPage {                        //наследуемся о�
 
     @FindBy(xpath = "//span/a[contains(text(),'Vacancies')]")
     public WebElement headerVacanciesBtn;
-
-    public void waitForAppear() {
-        String textToAppear = "Work with Us";
-        WebElement titleText = driver.findElement(By.xpath("//h1[contains(text(),'Work with Us')]"));
-
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.textToBePresentInElement(titleText, textToAppear));
-    }
 
     public void verifyCurrentURL(String currentTab) {
         String url = "https://careers.epam.ua/vacancies";

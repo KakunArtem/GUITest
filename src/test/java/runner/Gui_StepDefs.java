@@ -7,9 +7,9 @@ import cucumber.api.java.en.When;
 import steps.BasicStep;
 import utilsX.BrowserDriver;
 
-public class Gui_SD extends BrowserDriver {
+public class Gui_StepDefs extends BrowserDriver {
 
-    BasicStep basicStep = new BasicStep(driver);
+    private BasicStep basicStep = new BasicStep(driver);
 
     @Given("^User is not an EPAM employee\\.$")
     public void userIsNotAnEpamEmployee() {
@@ -24,7 +24,7 @@ public class Gui_SD extends BrowserDriver {
     @And("^User select region \"([^\"]*)\" at location dropdown\\.$")
     public void userSelectRegionAtLocationDropdown(String arg1) {
         basicStep.pageIsLoaded();
-        basicStep.selectRegionAtFrontPage(arg1);
+        basicStep.selectRegionAtFrontPageDrp(arg1);
     }
 
     @And("^User go to \"([^\"]*)\" tab\\.$")
@@ -35,49 +35,49 @@ public class Gui_SD extends BrowserDriver {
 
     @And("^User fill the search field \"([^\"]*)\" with value \"([^\"]*)\"\\.$")
     public void userFillTheSearchFieldWithValue(String arg1, String arg2) {
-        basicStep.pageIsLoaded();                                                                                  //////1111111111
+        basicStep.pageIsLoaded();
         basicStep.fillSearchFieldAtVacanciesPage(arg1, arg2);
     }
 
     @And("^User select location \"([^\"]*)\" from location dropdown\\.$")
-    public void user_select_location_from_location_dropdown(String arg1) throws Throwable {
+    public void userSelectLocationFromLocationDropdown(String arg1) throws Throwable {
        basicStep.selectLocationAtVacanciesPageDrp(arg1);
     }
 
     @And("^User tick \"([^\"]*)\" in \"([^\"]*)\" dropdown\\.$")
-    public void user_tick_in_dropdown(String arg1, String arg2) throws Throwable {
+    public void userTickInDropdown(String arg1, String arg2) throws Throwable {
         basicStep.selectSkillAtVacanciesPageDrp(arg1, arg2);
     }
 
     @When("^User click \"([^\"]*)\" button\\.$")
-    public void user_click_button(String arg1) {
+    public void userClickButton(String arg1) {
         basicStep.clickBtnOnVacanciesPage(arg1);
     }
 
     @Then("^User sees list of job openings related to above criteria: \"([^\"]*)\" in \"([^\"]*)\", \"([^\"]*)\"\\.$")
-    public void user_sees_list_of_job_openings_related_to_above_criteria(String arg1, String arg2, String arg3) {
-        basicStep.pageIsLoaded();                                                                                         //////11111111111
+    public void userSeesListOfJobOpeningsRelatedToAboveCriteria(String arg1, String arg2, String arg3) {
+        basicStep.pageIsLoaded();
         basicStep.checkChosenCriteriaAtJobLPage(arg1, arg2, arg3);
     }
 
     @When("^User select first vacancy and click \"([^\"]*)\" \"([^\"]*)\" button\\.$")
-    public void user_select_first_vacancy_and_click_button(String arg1, int arg2) throws Exception {
+    public void userSelectFirstVacancyAndClickButton(String arg1, int arg2){
         basicStep.clickApplyBtnAtJobLPage(arg1, arg2);
     }
 
     @Then("^User sees description of selected vacancy\\.$")
-    public void user_sees_description_of_selected_vacancy() {
-        basicStep.pageIsLoaded();                                                                                     ////111111111
+    public void userSeesDescriptionOfSelectedVacancy() {
+        basicStep.pageIsLoaded();
         basicStep.checkDescriptionAtJobDPage();
     }
 
     @Then("^User sees next blocks: \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"\\.$")
-    public void user_sees_next_blocks(String arg1, String arg2, String arg3, String arg4, String arg5) {
+    public void userSeesNextBlocks(String arg1, String arg2, String arg3, String arg4, String arg5) {
         basicStep.checkBlocksAtJobDPage(arg1, arg2, arg3, arg4, arg5);
     }
 
     @Then("^User sees item \"([^\"]*)\" \"([^\"]*)\" at \"([^\"]*)\" block\\.$")
-    public void user_sees_item_at_block(String arg1, int arg2, String arg3) {
-        basicStep.offerBlockItems(arg1, arg2, arg3);
+    public void userSeesItemAtBlock(String arg1, int arg2, String arg3) {
+        basicStep.checkOfferBlockItems(arg1, arg2, arg3);
     }
 }
