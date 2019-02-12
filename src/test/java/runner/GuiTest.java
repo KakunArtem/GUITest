@@ -5,7 +5,8 @@ import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import utils.BrowserDriver;
+import utilsX.BrowserDriver;
+
 
 @RunWith(Cucumber.class)
 
@@ -13,7 +14,7 @@ import utils.BrowserDriver;
         plugin = {"pretty"},
         features = {"src/test/resources"})
 
-public class RunEndToEndTest extends BrowserDriver {
+public class GuiTest extends BrowserDriver {
 
     @BeforeClass
     public static void setUp() {

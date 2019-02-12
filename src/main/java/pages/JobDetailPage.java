@@ -57,7 +57,7 @@ public class JobDetailPage {
         }
     }
 
-    public void offerBlockItem(String item, int itemCount, String blockName) {
+    public void offerBlockItems(String item, int itemCount, String blockName) {
         int count = 0;
 
         WebElement weOfferBlock = driver.findElement(By.xpath("//h4[contains(text(),'We offer')]/following-sibling::ul"));

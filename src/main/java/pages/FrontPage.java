@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,9 +19,9 @@ public class FrontPage {
         this.driver = driver;
     }
 
-    public void waitForAppear() {
+    public void pageIsLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cookie-disclaimer-ui")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".header__logo")));
     }
 
     public void selectRegion(String region) {
