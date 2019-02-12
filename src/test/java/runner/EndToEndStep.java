@@ -24,7 +24,7 @@ public class EndToEndStep extends BrowserDriver {
 
     @When("^User go to website \"([^\"]*)\"\\.$")
     public void user_go_to_website_epam_com(String arg1) {
-        BrowserDriver.loadPage(frontPage.goToWebSite(arg1));
+        BrowserDriver.loadPage(arg1);
     }
 
     @And("^User select region \"([^\"]*)\" at location dropdown\\.$")
@@ -67,8 +67,9 @@ public class EndToEndStep extends BrowserDriver {
     }
 
     @When("^User select first vacancy and click \"([^\"]*)\" \"([^\"]*)\" button\\.$")
-    public void user_select_first_vacancy_and_click_button(String arg1, int arg2) {
+    public void user_select_first_vacancy_and_click_button(String arg1, int arg2) throws Exception {
         jobListingsPage.clickApplyBtn(arg1, arg2);
+        Thread.sleep(6000);
     }
 
     @Then("^User sees description of selected vacancy\\.$")

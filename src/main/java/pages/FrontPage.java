@@ -23,10 +23,6 @@ public class FrontPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cookie-disclaimer-ui")));
     }
 
-    public String goToWebSite(String webPage) {
-        return webPage;
-    }
-
     public void selectRegion(String region) {
         WebElement selectRegionBtn = driver.findElement(By.cssSelector(".location-selector__button"));
         selectRegionBtn.click();

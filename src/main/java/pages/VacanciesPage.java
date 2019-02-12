@@ -83,9 +83,9 @@ public class VacanciesPage {
     }
 
     public void clickBtn(String button) {
-        List<WebElement> buttonsTop = driver.findElements(By.xpath("//button"));
+        List<WebElement> topButtons = driver.findElements(By.xpath("//button"));
         List<WebElement> allButtons = driver.findElements(By.xpath("//span[contains(@class, 'button__content')]"));
-        allButtons.addAll(buttonsTop);
+        allButtons.addAll(topButtons);
 
         for (WebElement o : allButtons) {
             if (o.getText().equals(button.toUpperCase())) {
