@@ -30,8 +30,8 @@ public class BasicStep extends BrowserDriver {
 
     //FrontPage
     @Step
-    public void waitForAppearFrontPage(){
-        frontPage.waitForAppear();
+    public void pageIsLoaded(){
+        frontPage.pageIsLoaded();
     }
 
     @Step

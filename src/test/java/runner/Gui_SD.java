@@ -9,7 +9,6 @@ import utilsX.BrowserDriver;
 
 public class Gui_SD extends BrowserDriver {
 
-
     BasicStep basicStep = new BasicStep(driver);
 
     @Given("^User is not an EPAM employee\\.$")
@@ -24,7 +23,7 @@ public class Gui_SD extends BrowserDriver {
 
     @And("^User select region \"([^\"]*)\" at location dropdown\\.$")
     public void userSelectRegionAtLocationDropdown(String arg1) {
-        basicStep.waitForAppearFrontPage();
+        basicStep.pageIsLoaded();
         basicStep.selectRegionAtFrontPage(arg1);
     }
 
@@ -36,7 +35,7 @@ public class Gui_SD extends BrowserDriver {
 
     @And("^User fill the search field \"([^\"]*)\" with value \"([^\"]*)\"\\.$")
     public void userFillTheSearchFieldWithValue(String arg1, String arg2) {
-        basicStep.waitForAppearFrontPage();                                                                                  //////1111111111
+        basicStep.pageIsLoaded();                                                                                  //////1111111111
         basicStep.fillSearchFieldAtVacanciesPage(arg1, arg2);
     }
 
@@ -57,7 +56,7 @@ public class Gui_SD extends BrowserDriver {
 
     @Then("^User sees list of job openings related to above criteria: \"([^\"]*)\" in \"([^\"]*)\", \"([^\"]*)\"\\.$")
     public void user_sees_list_of_job_openings_related_to_above_criteria(String arg1, String arg2, String arg3) {
-        basicStep.waitForAppearFrontPage();                                                                                         //////11111111111
+        basicStep.pageIsLoaded();                                                                                         //////11111111111
         basicStep.checkChosenCriteriaAtJobLPage(arg1, arg2, arg3);
     }
 
@@ -68,7 +67,7 @@ public class Gui_SD extends BrowserDriver {
 
     @Then("^User sees description of selected vacancy\\.$")
     public void user_sees_description_of_selected_vacancy() {
-        basicStep.waitForAppearFrontPage();                                                                                     ////111111111
+        basicStep.pageIsLoaded();                                                                                     ////111111111
         basicStep.checkDescriptionAtJobDPage();
     }
 
