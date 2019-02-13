@@ -27,6 +27,7 @@ public class BasicStep extends BrowserDriver {
         BrowserDriver.loadPage(url);
     }
 
+
     //FrontPage
     @Step
     public void pageIsLoaded() {
@@ -55,12 +56,12 @@ public class BasicStep extends BrowserDriver {
     }
 
     @Step
-    public void selectLocationAtVacanciesPageDrp(String location) throws Exception {
+    public void selectLocationAtVacanciesPageDrp(String location) {
         vacanciesPage.selectLocation(location);
     }
 
     @Step
-    public void selectSkillAtVacanciesPageDrp(String jobTitle, String drpType) throws Exception {
+    public void selectSkillAtVacanciesPageDrp(String jobTitle, String drpType) {
         vacanciesPage.selectSkill(jobTitle, drpType);
     }
 

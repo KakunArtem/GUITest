@@ -4,10 +4,10 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utilsX.BrowserDriver;
 
 import java.util.List;
 
@@ -20,8 +20,7 @@ public class FrontPage {
     }
 
     public void pageIsLoaded() {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".header__logo")));
+        BrowserDriver.waitX().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".header__logo")));
     }
 
     public void selectRegion(String region) {

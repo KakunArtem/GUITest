@@ -7,9 +7,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utilsX.BrowserDriver;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 public class VacanciesPage {
     private WebDriver driver;
@@ -40,13 +46,12 @@ public class VacanciesPage {
         jobId.sendKeys(keyWord);
     }
 
-    public void selectLocation(String location) throws Exception {
+    public void selectLocation(String location) {
         WebElement locationDrpBtn = driver.findElement(By.xpath("//span/b[@role='presentation']"));
         locationDrpBtn.click();
-        Thread.sleep(5000);
 
         WebElement locationDrp = driver.findElement(By.cssSelector(".select2-results"));
-        Assert.assertEquals(true, locationDrp.isDisplayed());
+        BrowserDriver.waitX().until(ExpectedConditions.visibilityOf(locationDrp));
 
         List<WebElement> locations = driver.findElements(By.xpath("//ul[@role='listbox']/li"));
         for (WebElement o : locations) {
@@ -57,13 +62,12 @@ public class VacanciesPage {
         }
     }
 
-    public void selectSkill(String jobTitle, String drpType) throws Exception {
+    public void selectSkill(String jobTitle, String drpType) {
         WebElement skillSelectDrp = driver.findElement(By.xpath("//div[contains(text(),'All Skills')]"));
         skillSelectDrp.click();
-        Thread.sleep(5000);
 
         WebElement skillsDrp = driver.findElement(By.cssSelector(".multi-select-dropdown"));
-        Assert.assertEquals(true, skillsDrp.isDisplayed());
+        BrowserDriver.waitX().until(ExpectedConditions.visibilityOf(skillsDrp));
 
         List<WebElement> skills = driver.findElements(By.xpath("//div/div/ul//span[contains(text(),'')]"));
         for (WebElement o : skills) {
