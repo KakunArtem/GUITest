@@ -18,6 +18,7 @@ public class BrowserDriver {
         driver.manage().timeouts().pageLoadTimeout(99, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);
     }
+
     public static Wait waitX(){
         Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(30))

@@ -40,12 +40,12 @@ public class Gui_StepDefs extends BrowserDriver {
     }
 
     @And("^User select location \"([^\"]*)\" from location dropdown\\.$")
-    public void userSelectLocationFromLocationDropdown(String arg1) throws Throwable {
+    public void userSelectLocationFromLocationDropdown(String arg1) {
        basicStep.selectLocationAtVacanciesPageDrp(arg1);
     }
 
     @And("^User tick \"([^\"]*)\" in \"([^\"]*)\" dropdown\\.$")
-    public void userTickInDropdown(String arg1, String arg2) throws Throwable {
+    public void userTickInDropdown(String arg1, String arg2) {
         basicStep.selectSkillAtVacanciesPageDrp(arg1, arg2);
     }
 

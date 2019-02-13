@@ -61,7 +61,7 @@ public class BasicStep extends BrowserDriver {
     }
 
     @Step
-    public void selectSkillAtVacanciesPageDrp(String jobTitle, String drpType) {
+    public void selectSkillAtVacanciesPageDrp(String jobTitle, String drpType){
         vacanciesPage.selectSkill(jobTitle, drpType);
     }
 
