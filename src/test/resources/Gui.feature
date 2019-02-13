@@ -1,5 +1,5 @@
 
-Feature: end to end test.
+Feature: GUI test.
 
 Scenario:go through EPAM site to available Software Test Engineering vacancies.
 
