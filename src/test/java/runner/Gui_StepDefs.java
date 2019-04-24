@@ -80,4 +80,9 @@ public class Gui_StepDefs extends BrowserDriver {
     public void userSeesItemAtBlock(String arg1, int arg2, String arg3) {
         basicStep.checkOfferBlockItems(arg1, arg2, arg3);
     }
+
+    @Then("Test commit ")
+    public void testCommit(){
+
+    }
 }
